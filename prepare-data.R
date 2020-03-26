@@ -58,6 +58,14 @@ file.copy(file.path("raw", "barbera-twitter", "leaders-twitter.RData"), file.pat
 
 
 ### Chapter 05
+dir.create(file.path("ch05"), showWarnings = FALSE)
+
+# G-Econ dataset
+dir.create(file.path("raw", "g-econ"), showWarnings = FALSE)
+download.file("https://gecon.yale.edu/sites/default/files/files/Gecon40_post_final.xls", file.path("raw", "g-econ", "g-econ-v4.xls"))
+file.copy(file.path("raw", "g-econ", "g-econ-v4.xls"), file.path("ch05", "g-econ-v4.xls"))
+
+
 
 file.copy(file.path("raw_data", "gecon", "spatial_inequality.csv"),
           file.path("data", "ch06", "spatial_inequality.csv"))
