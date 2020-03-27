@@ -66,20 +66,24 @@ download.file("https://gecon.yale.edu/sites/default/files/files/Gecon40_post_fin
 file.copy(file.path("raw", "g-econ", "g-econ-v4.xls"), file.path("ch05", "g-econ-v4.xls"))
 
 
-
-file.copy(file.path("raw_data", "gecon", "spatial_inequality.csv"),
-          file.path("data", "ch06", "spatial_inequality.csv"))
-
 ### Chapter 06
+dir.create(file.path("ch06"), showWarnings = FALSE)
 
-file.copy(file.path("raw_data", "wid", "WID_USA_p90p100.csv"),
-          file.path("data", "ch07", "WID_USA_p90p100.csv"))
+# US inquality estimates from the World Inequality Database (https://wid.world/data/)
+dir.create(file.path("raw", "wid"), showWarnings = FALSE)
+tmp <- tempdir()
+download.file("https://wid.world/bulk_download/wid_all_data.zip", file.path(tmp, "wid.zip"))
+unzip(file.path(tmp, "wid.zip"), exdir=tmp)
+file.copy(file.path(tmp, "WID_data_US.csv"), file.path("raw", "wid", "us-inequality.csv"))
+inequality <- read_delim(file.path("raw", "wid", "us-inequality.csv"), delim=";") %>% filter(variable == "sptincj992" & percentile == "p90p100")
+write_delim(inequality, file.path("ch06", "us-inequality.csv"), delim = "," )
 
-file.copy(file.path("raw_data", "fred", "US_GDPpc.csv"),
-          file.path("data", "ch07", "US_GDPpc.csv"))
 
-file.copy(file.path("raw_data", "loc", "US_presidents.csv"),
-          file.path("data", "ch07", "US_presidents.csv"))
+# US GDP estimates from the Federal Reserve Bank of St. Louis (https://fred.stlouisfed.org/series/A939RX0Q048SBEA)
+dir.create(file.path("raw", "gdp-us"), showWarnings = FALSE)
+download.file("https://fred.stlouisfed.org/graph/fredgraph.csv?id=A939RX0Q048SBEA&scale=left&cosd=1947-01-01&coed=2019-10-01&line_color=%234572a7&link_values=false&line_style=solid&mark_type=none&mw=3&lw=2&ost=-99999&oet=99999&mma=0&fml=a&fq=Quarterly&fam=avg&fgst=lin&fgsnd=2009-06-01&line_index=1&transformation=lin&vintage_date=2020-03-26&revision_date=2020-03-26&nd=1947-01-01", file.path("raw", "gdp-us", "us-gdp-pc.csv"))
+file.copy(file.path("raw", "gdp-us", "us-gdp-pc.csv"), file.path("ch06", "us-gdp-pc.csv"))
+
 
 ## Chapter 23-tidyverse ----
 file.copy(file.path("raw_data", "wid", "WID_p90p100.csv"),
