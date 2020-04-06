@@ -35,8 +35,8 @@ write_delim(capdist, file.path("ch04", "csv-example-quotes.csv"), delim = "," )
 
 # Dreher, Sturm and Vreeland (2009) UN Security Council data
 dir.create(file.path("raw", "dreher-unsc-membership"), showWarnings = FALSE)
-download.file("http://www.axel-dreher.de/UNSCdata.xls", file.path("raw", "dreher-unsc-membership", "unsc-membership.xls"))
-file.copy(file.path("raw", "dreher-unsc-membership", "unsc-membership.xls"), file.path("ch04", "unsc-membership.xls"))
+download.file("http://www.axel-dreher.de/UNSCdata.xls", file.path("raw", "dreher-unsc-membership", "UNSCdata.xls"))
+file.copy(file.path("raw", "dreher-unsc-membership", "UNSCdata.xls"), file.path("ch04", "unsc-membership.xls"))
 
 # Polo (2020) terrorism targets data
 dir.create(file.path("raw", "polo-terrorism"), showWarnings = FALSE)
@@ -54,8 +54,8 @@ file.copy(file.path("raw", "worlds-of-journalism", "WJS 2012-16 aggregated.sav")
 
 # Barbera (2015) world leader Twitter data 
 dir.create(file.path("raw", "barbera-twitter"), showWarnings = FALSE)
-download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/26589/LLYTFB", file.path("raw", "barbera-twitter", "leaders-twitter.RData"))
-file.copy(file.path("raw", "barbera-twitter", "leaders-twitter.RData"), file.path("ch04", "leaders-twitter.RData"))
+download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/26589/LLYTFB", file.path("raw", "barbera-twitter", "elites-data.RData"))
+file.copy(file.path("raw", "barbera-twitter", "elites-data.RData"), file.path("ch04", "leaders-twitter.RData"))
 
 
 ### Chapter 05
@@ -63,8 +63,8 @@ dir.create(file.path("ch05"), showWarnings = FALSE)
 
 # G-Econ dataset
 dir.create(file.path("raw", "g-econ"), showWarnings = FALSE)
-download.file("https://gecon.yale.edu/sites/default/files/files/Gecon40_post_final.xls", file.path("raw", "g-econ", "g-econ-v4.xls"))
-file.copy(file.path("raw", "g-econ", "g-econ-v4.xls"), file.path("ch05", "g-econ-v4.xls"))
+download.file("https://gecon.yale.edu/sites/default/files/files/Gecon40_post_final.xls", file.path("raw", "g-econ", "Gecon40_post_final.xls"))
+file.copy(file.path("raw", "g-econ", "Gecon40_post_final.xls"), file.path("ch05", "g-econ-v4.xls"))
 
 
 ### Chapter 06
@@ -110,9 +110,6 @@ dir.create(file.path("raw", "polity"), showWarnings = FALSE)
 download.file("http://www.systemicpeace.org/inscr/p4v2018.xls", file.path("raw", "polity", "p4v2018.xls"))
 file.copy(file.path("raw", "polity", "p4v2018.xls"), file.path("ch07", "polity4.xls"))
 
-
-file.copy(file.path("raw_data", "wid", "WID_p90p100_wide.csv"),
-          file.path("data", "ch08", "WID_p90p100_wide.csv"))
 
 ## Chapter 30-rdbintro ----
 
