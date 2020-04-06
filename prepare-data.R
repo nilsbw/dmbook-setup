@@ -1,5 +1,6 @@
 library(tidyverse)
 library(sf)
+library(ISOcodes)
 
 # This file documents the generation of the data files for the exercises in 
 # Weidmann, Nils B. "Data Management for Social Scientists"
@@ -70,12 +71,18 @@ file.copy(file.path("raw", "g-econ", "g-econ-v4.xls"), file.path("ch05", "g-econ
 dir.create(file.path("ch06"), showWarnings = FALSE)
 
 # US inquality estimates from the World Inequality Database (https://wid.world/data/)
+iso2letter <- ISO_3166_1$Alpha_2
 dir.create(file.path("raw", "wid"), showWarnings = FALSE)
 tmp <- tempdir()
 download.file("https://wid.world/bulk_download/wid_all_data.zip", file.path(tmp, "wid.zip"))
 unzip(file.path(tmp, "wid.zip"), exdir=tmp)
-file.copy(file.path(tmp, "WID_data_US.csv"), file.path("raw", "wid", "us-inequality.csv"))
-inequality <- read_delim(file.path("raw", "wid", "us-inequality.csv"), delim=";") %>% filter(variable == "sptincj992" & percentile == "p90p100")
+for (file in list.files(tmp, "^WID_data")) {
+  country <- file %>% str_replace("WID_data_", "") %>% str_replace(".csv", "")
+  if (country %in% iso2letter) {
+    file.copy(file.path(tmp, file), file.path("raw", "wid", file))
+  }
+}
+inequality <- read_delim(file.path("raw", "wid", "WID_data_US.csv"), delim=";") %>% filter(variable == "sptincj992" & percentile == "p90p100")
 write_delim(inequality, file.path("ch06", "us-inequality.csv"), delim = "," )
 
 
@@ -85,12 +92,24 @@ download.file("https://fred.stlouisfed.org/graph/fredgraph.csv?id=A939RX0Q048SBE
 file.copy(file.path("raw", "gdp-us", "us-gdp-pc.csv"), file.path("ch06", "us-gdp-pc.csv"))
 
 
-## Chapter 23-tidyverse ----
-file.copy(file.path("raw_data", "wid", "WID_p90p100.csv"),
-          file.path("data", "ch08", "WID_p90p100.csv"))
+### Chapter 07
+dir.create(file.path("ch07"), showWarnings = FALSE)
 
-file.copy(file.path("raw_data", "polity", "p4v2017.xls"),
-          file.path("data", "ch08", "p4v2017.xls"))
+# Global inquality estimates from the World Inequality Database (https://wid.world/data/)
+files <- list.files(file.path("raw", "wid"), "*.csv")
+widfile <- read_delim(file.path("raw", "wid", files[1]), delim=";") %>% filter(variable == "sptincj992" & percentile == "p90p100") 
+write_delim(widfile, file.path("ch07", "inequality.csv"), delim = ",")
+
+for (file in files[-1]) {
+  widfile <- read_delim(file.path("raw", "wid", file), delim=";") %>% filter(variable == "sptincj992" & percentile == "p90p100")
+  write_delim(widfile, file.path("ch07", "inequality.csv"), delim = ",", append = T)
+}
+
+# Polity IV database
+dir.create(file.path("raw", "polity"), showWarnings = FALSE)
+download.file("http://www.systemicpeace.org/inscr/p4v2018.xls", file.path("raw", "polity", "p4v2018.xls"))
+file.copy(file.path("raw", "polity", "p4v2018.xls"), file.path("ch07", "polity4.xls"))
+
 
 file.copy(file.path("raw_data", "wid", "WID_p90p100_wide.csv"),
           file.path("data", "ch08", "WID_p90p100_wide.csv"))
