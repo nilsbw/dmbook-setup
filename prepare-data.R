@@ -1,6 +1,7 @@
 library(tidyverse)
 library(sf)
 library(ISOcodes)
+library(countrycode)
 
 # This file documents the generation of the data files for the exercises in 
 # Weidmann, Nils B. "Data Management for Social Scientists"
@@ -110,24 +111,35 @@ dir.create(file.path("raw", "polity"), showWarnings = FALSE)
 download.file("http://www.systemicpeace.org/inscr/p4v2018.xls", file.path("raw", "polity", "p4v2018.xls"))
 file.copy(file.path("raw", "polity", "p4v2018.xls"), file.path("ch07", "polity4.xls"))
 
+### Chapter 08
+dir.create(file.path("ch08"), showWarnings = FALSE)
 
-## Chapter 30-rdbintro ----
+# Elections data from the ParlGov database (2018 Version)
+dir.create(file.path("raw", "parlgov"), showWarnings = FALSE)
+download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/F0YGNC/A1XJ4P", file.path("raw", "parlgov", "election.tab"))
+read_delim(file.path("raw", "parlgov", "election.tab"), delim = "\t", escape_backslash = T, escape_double = F) %>% 
+  filter(election_type == "parliament") %>% 
+  filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region"))) %>%
+  select(election_id, country_name, election_date, party_id, vote_share, seats, seats_total) %>% 
+  write_csv(file.path("ch08", "elections.csv"))
 
-### Read election result data and remove EP elections
-read_csv(file.path("raw_data", "parlgov", "view_election.csv")) %>%
-  filter(election_type == "parliament") %>% # European Parliament elections are "ep"
-  select(election_id, country_name, election_date, party_id, vote_share, seats, seats_total) %>%
-  semi_join(eu_countries, by = c("country_name" = "name")) %>%
-  write_csv(file.path("data", "ch09", "parlgov_election.csv"), na = "")
+### Chapter 09
+dir.create(file.path("ch09"), showWarnings = FALSE)
 
-## Chapter 31-rdbadvanced ----
-### Read party data and select correct countries and columns
-read_csv(file.path("raw_data", "parlgov", "view_party.csv")) %>%
-  semi_join(eu_countries, by = c("country_name" = "name")) %>%
+# Parties data from the ParlGov database (2018 Version)
+download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/F0YGNC/Q49NWO", file.path("raw", "parlgov", "party.tab"))
+
+read_delim(file.path("raw", "parlgov", "election.tab"), delim = "\t", escape_backslash = T, escape_double = F) %>% 
+  filter(election_type == "parliament") %>% 
+  filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region"))) %>%
+  select(election_id, country_name, election_date, party_id, vote_share, seats, seats_total) %>% 
+  write_csv(file.path("ch09", "elections.csv"))
+read_delim(file.path("raw", "parlgov", "party.tab"), delim = "\t", escape_backslash = T, escape_double = F) %>% 
+  filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region"))) %>%
   select(party_id, party_name_short, party_name_english, country_name, family_name) %>%
-  write_csv(file.path("data", "ch10", "parlgov_party.csv"))
+  write_csv(file.path("ch09", "parties.csv"))
 
-source(file.path("raw_data","populist","recode_populist_to_parlgov.R"))
+# Populist 2.0 at https://populistorg.files.wordpress.com/2020/02/populist-2.0.xlsx
 
 populist %>%
   rename(country = Country,
