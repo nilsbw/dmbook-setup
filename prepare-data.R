@@ -65,7 +65,7 @@ dir.create(file.path("ch05"), showWarnings = FALSE)
 # G-Econ dataset
 dir.create(file.path("raw", "g-econ"), showWarnings = FALSE)
 download.file("https://gecon.yale.edu/sites/default/files/files/Gecon40_post_final.xls", file.path("raw", "g-econ", "Gecon40_post_final.xls"))
-file.copy(file.path("raw", "g-econ", "Gecon40_post_final.xls"), file.path("ch05", "g-econ-v4.xls"))
+file.copy(file.path("raw", "g-econ", "Gecon40_post_final.xls"), file.path("ch05", "g-econ.xls"))
 
 
 ### Chapter 06
@@ -109,7 +109,7 @@ for (file in files[-1]) {
 # Polity IV database
 dir.create(file.path("raw", "polity"), showWarnings = FALSE)
 download.file("http://www.systemicpeace.org/inscr/p4v2018.xls", file.path("raw", "polity", "p4v2018.xls"))
-file.copy(file.path("raw", "polity", "p4v2018.xls"), file.path("ch07", "polity4.xls"))
+file.copy(file.path("raw", "polity", "p4v2018.xls"), file.path("ch07", "polity.xls"))
 
 ### Chapter 08
 dir.create(file.path("ch08"), showWarnings = FALSE)
@@ -119,7 +119,7 @@ dir.create(file.path("raw", "parlgov"), showWarnings = FALSE)
 download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/F0YGNC/A1XJ4P", file.path("raw", "parlgov", "election.tab"))
 read_delim(file.path("raw", "parlgov", "election.tab"), delim = "\t", escape_backslash = T, escape_double = F) %>% 
   filter(election_type == "parliament") %>% 
-  filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region"))) %>%
+  filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region")) | country_name_short == "CYP") %>%
   select(election_id, country_name, election_date, party_id, vote_share, seats, seats_total) %>% 
   write_csv(file.path("ch08", "elections.csv"))
 
@@ -129,27 +129,29 @@ dir.create(file.path("ch09"), showWarnings = FALSE)
 # Parties data from the ParlGov database (2018 Version)
 download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/F0YGNC/Q49NWO", file.path("raw", "parlgov", "party.tab"))
 
+# fix countrycode() issue which puts Cyprus in the wrong region
 read_delim(file.path("raw", "parlgov", "election.tab"), delim = "\t", escape_backslash = T, escape_double = F) %>% 
   filter(election_type == "parliament") %>% 
-  filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region"))) %>%
+  filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region")) | country_name_short == "CYP") %>%
   select(election_id, country_name, election_date, party_id, vote_share, seats, seats_total) %>% 
   write_csv(file.path("ch09", "elections.csv"))
 read_delim(file.path("raw", "parlgov", "party.tab"), delim = "\t", escape_backslash = T, escape_double = F) %>% 
-  filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region"))) %>%
+  filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region")) | country_name_short == "CYP") %>%
   select(party_id, party_name_short, party_name_english, country_name, family_name) %>%
   write_csv(file.path("ch09", "parties.csv"))
 
-# Populist 2.0 at https://populistorg.files.wordpress.com/2020/02/populist-2.0.xlsx
+# PopuList database (Version 2.0)
+# Fix issue where party shows up twice (Poland, parlgov_id==2602)
+library(readxl)
+dir.create(file.path("raw", "popu-list"), showWarnings = FALSE)
 
-populist %>%
-  rename(country = Country,
-         party = Party,
-         populist = Populist,
-         far_right = `Far right`,
-         far_left = `Far left`,
-         eurosceptic = Eurosceptic) %>%
-  filter(!is.na(party)) %>%
-  write_csv(file.path("data", "ch10", "populist_parl-gov-compatible.csv"))
+download.file("https://populistorg.files.wordpress.com/2020/02/populist-2.0.xlsx", file.path("raw", "popu-list", "populist-2.0.xlsx"))
+
+read_excel(file.path("raw", "popu-list", "populist-2.0.xlsx")) %>% 
+  filter(!(parlgov_id==2602 & party_name_short == "ZRP")) %>%
+  select(parlgov_id, populist, farleft, farright) %>%
+  filter(!is.na(parlgov_id)) %>%
+  write_csv(file.path("ch09", "populist.csv"))
 
 ## Chapter 11 - Spatial Data ----
 bm = st_read(file.path("raw_data", "bosnia_municipalities", "bosnia_1991.shp")) %>%
