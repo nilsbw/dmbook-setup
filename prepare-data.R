@@ -11,10 +11,13 @@ library(countrycode)
 # https://github.com/nilsbw/dmbook-exercises
 
 # This script downloads each dataset to a subfolder in the "raw" directory. 
-# See the code below for the locations of the original files 
+# See the code below for the locations of the original files online,
 # and the subfolders where they are stored locally.
-# Many datasets are modified for pedagocial purposes. See the code below 
-# for the modifications applied to the data.
+# Many datasets are modified to facilitate presentation in the book. 
+# Modifications include the dropping of variables or cases, the 
+# renaming of files, or changes in the file format. 
+# See the code below for the modifications applied to the data.
+
 
 # create directory for raw files
 dir.create(file.path("raw"), showWarnings = FALSE)
@@ -153,26 +156,28 @@ read_excel(file.path("raw", "popu-list", "populist-2.0.xlsx")) %>%
   filter(!is.na(parlgov_id)) %>%
   write_csv(file.path("ch09", "populist.csv"))
 
-## Chapter 11 - Spatial Data ----
-bm = st_read(file.path("raw_data", "bosnia_municipalities", "bosnia_1991.shp")) %>%
-  select(Id, name)
-st_write(bm, file.path("data", "ch11", "bosnia_1991.shp"))
+### Chapter 11
+dir.create(file.path("ch11"), showWarnings = FALSE)
 
-### GED Data
-read_delim(file.path("raw_data", "ucdp", "ged181.csv"), delim = ",") %>%
-  filter(conflict_new_id %in% c(389,397, 451, 528, 4523, 4871)) %>%
+## Uppsala Geo-referenced Event Dataset (Version 18.1)
+dir.create(file.path("raw", "ged"), showWarnings = FALSE)
+tmp <- tempdir()
+download.file("https://ucdp.uu.se/downloads/ged/ged191-csv.zip", file.path(tmp, "ged191-csv.zip"))
+unzip(file.path(tmp, "ged191-csv.zip"), exdir=tmp)
+file.copy(file.path(tmp, "ged191.csv"), file.path("raw", "ged", "ged191.csv"))
+read_delim(file.path("raw", "ged", "ged191.csv"), delim = ",") %>%
+  filter(conflict_new_id %in% c(389, 397, 451, 528, 4523, 4871)) %>%
   filter(where_prec==1) %>%
   select(id, date_start, latitude, longitude, best) %>%
-  write_csv(file.path("data", "ch11", "ged181.csv"), na="NA")
+  write_csv(file.path("ch11", "ged.csv"))
 
-## Chapter 12-textasdata ----
-# fetch bbc-fulltext, unpack and copy to ch12 directory
+### Chapter 12
+dir.create(file.path("ch12"), showWarnings = FALSE)
 
-## Chapter 13-networkdata ----
+### Chapter 13
+dir.create(file.path("ch13"), showWarnings = FALSE)
 
-# COW Trade data
-unlink(file.path("data", "ch13"), recursive = T)
-dir.create(file.path("data", "ch13"))
+## COW Trade data
 download.file("https://correlatesofwar.org/data-sets/bilateral-trade/cow_trade_4.0/at_download/file", file.path("data", "ch13", "cow_trade_v4.zip"))
 unzip(file.path("data", "ch13", "cow_trade_v4.zip"), exdir=file.path("data", "ch13"))
 unlink(file.path("data", "ch13", "cow_trade_v4.zip"))
