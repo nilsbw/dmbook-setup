@@ -1,4 +1,4 @@
-Gleditsch, Kristian Skrede. 2008. "Distance between Capital Cities." Online Resource. Available at [http://ksgleditsch.com/data-5.html].
+Gleditsch, Kristian Skrede. 2008. "Distance between Capital Cities." Online Resource. Available at http://ksgleditsch.com/data-5.html.
 
 Dreher, Axel, Jan-Egbert Sturm and James Raymond Vreeland. 2009. "Development aid and international politics: Does membership on the UN Security Council influence World Bank decisions?"" Journal of Development Economics 88(1):1–18.
 
