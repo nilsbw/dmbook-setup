@@ -23,7 +23,6 @@ library(countrycode)
 dir.create(file.path("raw"), showWarnings = FALSE)
 
 ### Chapter 04
-dir.create(file.path("ch04"), showWarnings = FALSE)
 
 # Kristian Gleditsch capital distances data
 dir.create(file.path("raw", "ksg-capital-distances"), showWarnings = FALSE)
@@ -63,7 +62,6 @@ file.copy(file.path("raw", "barbera-twitter", "elites-data.RData"), file.path("c
 
 
 ### Chapter 05
-dir.create(file.path("ch05"), showWarnings = FALSE)
 
 # G-Econ dataset
 dir.create(file.path("raw", "g-econ"), showWarnings = FALSE)
@@ -72,7 +70,6 @@ file.copy(file.path("raw", "g-econ", "Gecon40_post_final.xls"), file.path("ch05"
 
 
 ### Chapter 06
-dir.create(file.path("ch06"), showWarnings = FALSE)
 
 # US inquality estimates from the World Inequality Database (https://wid.world/data/)
 iso2letter <- ISO_3166_1$Alpha_2
@@ -97,7 +94,6 @@ file.copy(file.path("raw", "gdp-us", "us-gdp-pc.csv"), file.path("ch06", "us-gdp
 
 
 ### Chapter 07
-dir.create(file.path("ch07"), showWarnings = FALSE)
 
 # Global inquality estimates from the World Inequality Database (https://wid.world/data/)
 files <- list.files(file.path("raw", "wid"), "*.csv")
@@ -115,7 +111,6 @@ download.file("http://www.systemicpeace.org/inscr/p4v2018.xls", file.path("raw",
 file.copy(file.path("raw", "polity", "p4v2018.xls"), file.path("ch07", "polity.xls"))
 
 ### Chapter 08
-dir.create(file.path("ch08"), showWarnings = FALSE)
 
 # Elections data from the ParlGov database (2018 Version)
 dir.create(file.path("raw", "parlgov"), showWarnings = FALSE)
@@ -127,7 +122,6 @@ read_delim(file.path("raw", "parlgov", "election.tab"), delim = "\t", escape_bac
   write_csv(file.path("ch08", "elections.csv"))
 
 ### Chapter 09
-dir.create(file.path("ch09"), showWarnings = FALSE)
 
 # Parties data from the ParlGov database (2018 Version)
 download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/F0YGNC/Q49NWO", file.path("raw", "parlgov", "party.tab"))
@@ -157,7 +151,6 @@ read_excel(file.path("raw", "popu-list", "populist-2.0.xlsx")) %>%
   write_csv(file.path("ch09", "populist.csv"))
 
 ### Chapter 11
-dir.create(file.path("ch11"), showWarnings = FALSE)
 
 ## Uppsala Geo-referenced Event Dataset (Version 18.1)
 dir.create(file.path("raw", "ged"), showWarnings = FALSE)
@@ -172,10 +165,8 @@ read_delim(file.path("raw", "ged", "ged191.csv"), delim = ",") %>%
   write_csv(file.path("ch11", "ged.csv"))
 
 ### Chapter 12
-dir.create(file.path("ch12"), showWarnings = FALSE)
 
 ### Chapter 13
-dir.create(file.path("ch13"), showWarnings = FALSE)
 
 ## COW Trade data
 download.file("https://correlatesofwar.org/data-sets/bilateral-trade/cow_trade_4.0/at_download/file", file.path("data", "ch13", "cow_trade_v4.zip"))
