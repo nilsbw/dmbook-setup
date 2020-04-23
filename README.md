@@ -1,8 +1,14 @@
-# Data for the exercises in "Data Management for Social Scientists"
+# Supplementary Material for "Data Management for Social Scientists" by Nils B. Weidmann
 
-This repository contains the necessary data files for the code and exercises presented in the book. 
+## Project file
 
-The data preparation script `prepare-data.R` downloads each dataset to a subfolder in the "raw" directory and applies the necessary modifications and copies the final files to one of the data subdirectories (`ch**`). 
+The `dmbook-exercises.Rproj` file can be used as a project file for RStudio.
+
+## Data 
+
+This repository also contains the necessary data files for the code and exercises presented in the book. 
+
+The data preparation is documented in `prepare-data.R`,. The script downloads each exteernal dataset to a subfolder in the "raw" directory, applies the necessary modifications and copies the final files to one of the data subdirectories (`ch04` etc). 
 
 For readers of this book, there is no need to run this file, since the required data files can be obtained directly from this repository. 
 
