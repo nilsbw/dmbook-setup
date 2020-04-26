@@ -6,7 +6,7 @@ The `dmbook-exercises.Rproj` file can be used as a project file for RStudio.
 
 ## Data 
 
-This repository also contains the necessary data files for the code and exercises presented in the book. 
+This repository also contains the necessary data files for the code and exercises presented in the book. Data files are organized by chapter (`ch04` etc). For each chapter, the references to the datasets are provided in the `REFERENCES.md` file.
 
 The data preparation is documented in `prepare-data.R`. The script downloads each external dataset to a subfolder under the `raw` directory, applies the necessary modifications and copies the final files to one of the data subdirectories (`ch04` etc). 
 
