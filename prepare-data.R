@@ -156,6 +156,17 @@ unlink(tmp, recursive = TRUE)
 
 ### Chapter 12
 
+## EUSpeech dataset
+library(zip)
+dir.create(file.path("raw", "euspeech"), showWarnings = FALSE)
+download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/GKABNU/XABKKH", file.path("raw", "euspeech", "supercorpus_unstemmed_V4.RData"))
+load(file.path("raw", "euspeech", "supercorpus_unstemmed_V4.RData"))
+docs <- corpus_unstemmed$documents
+docs <- subset(docs, country=="European Parliament")
+write_csv(docs, "speeches.csv")
+zipr(file.path("ch12", "speeches.csv.zip"), "speeches.csv")
+
+
 ### Chapter 13
 
 ## COW Trade data
