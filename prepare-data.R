@@ -156,16 +156,30 @@ unlink(tmp, recursive = TRUE)
 
 ### Chapter 12
 
-## EUSpeech dataset
-library(zip)
-dir.create(file.path("raw", "euspeech"), showWarnings = FALSE)
-download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/GKABNU/XABKKH", file.path("raw", "euspeech", "supercorpus_unstemmed_V4.RData"))
-load(file.path("raw", "euspeech", "supercorpus_unstemmed_V4.RData"))
-docs <- corpus_unstemmed$documents
-docs <- subset(docs, country=="European Parliament")
-write_csv(docs, "speeches.csv")
-zipr(file.path("ch12", "speeches.csv.zip"), "speeches.csv")
+## UN Debates Dataset
+dir.create(file.path("raw", "un-debates"), showWarnings = FALSE)
+tmp <- tempdir()
+download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/0TJX8Y/PZUURT", file.path(tmp, "UNGDC 1970-2018.zip"))
+unzip(file.path(tmp, "UNGDC 1970-2018.zip"), exdir=file.path(tmp))
+file.copy(file.path(tmp, "Converted sessions"), file.path("raw", "un-debates"), recursive = T)
+files <- list.files(file.path("raw", "un-debates"), pattern = "USA", recursive = T)
+for (file in files) {
+  file.copy(file.path("raw", "un-debates", file), file.path("ch12", "un-debates"))
+}
 
+## Canadian Parliamentary Speeches
+dir.create(file.path("raw", "canadian-hansard"), showWarnings = FALSE)
+download.file("https://www.lipad.ca/media/ca-proc.tar.gz", file.path("raw", "canadian-hansard", "ca-proc.tar.gz"))
+untar(file.path("raw", "canadian-hansard", "ca-proc.tar.gz"), exdir = file.path("raw", "canadian-hansard"))
+set.seed(3)
+unlink(file.path("ch12", "canadian-hansard", "*"))
+for (year in 1946:1993) {
+  files <- list.files(file.path("raw", "canadian-hansard", "ca-proc-updated-10-03-2016"), pattern = as.character(year))
+  selected_files <- sample(files, 1)
+  for (file in selected_files) {
+    file.copy(file.path("raw", "canadian-hansard", "ca-proc-updated-10-03-2016", file), file.path("ch12", "canadian-hansard"))
+  }
+}
 
 ### Chapter 13
 
