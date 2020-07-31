@@ -167,19 +167,6 @@ for (file in files) {
   file.copy(file.path("raw", "un-debates", file), file.path("ch12", "un-debates"))
 }
 
-## Canadian Parliamentary Speeches
-dir.create(file.path("raw", "canadian-hansard"), showWarnings = FALSE)
-download.file("https://www.lipad.ca/media/ca-proc.tar.gz", file.path("raw", "canadian-hansard", "ca-proc.tar.gz"))
-untar(file.path("raw", "canadian-hansard", "ca-proc.tar.gz"), exdir = file.path("raw", "canadian-hansard"))
-set.seed(3)
-unlink(file.path("ch12", "canadian-hansard", "*"))
-for (year in 1946:1993) {
-  files <- list.files(file.path("raw", "canadian-hansard", "ca-proc-updated-10-03-2016"), pattern = as.character(year))
-  selected_files <- sample(files, 1)
-  for (file in selected_files) {
-    file.copy(file.path("raw", "canadian-hansard", "ca-proc-updated-10-03-2016", file), file.path("ch12", "canadian-hansard"))
-  }
-}
 
 ### Chapter 13
 
