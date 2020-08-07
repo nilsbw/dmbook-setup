@@ -164,7 +164,7 @@ unzip(file.path(tmp, "UNGDC 1970-2018.zip"), exdir=file.path(tmp))
 file.copy(file.path(tmp, "Converted sessions"), file.path("raw", "un-debates"), recursive = T)
 files <- list.files(file.path("raw", "un-debates"), pattern = "USA", recursive = T)
 for (file in files) {
-  file.copy(file.path("raw", "un-debates", file), file.path("ch12", "un-debates"))
+  file.copy(file.path("raw", "un-debates", file), file.path("ch12"))
 }
 
 
