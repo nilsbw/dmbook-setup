@@ -1,4 +1,4 @@
-country_name,year,COWcode,v2x_polyarchy,e_regiongeo,e_migdppc
+country_name,year,cowcode,v2x_polyarchy,e_regiongeo,e_migdppc
 Afghanistan,1946,700,0.091,14,NA
 Afghanistan,1947,700,0.097,14,NA
 Afghanistan,1948,700,0.097,14,NA

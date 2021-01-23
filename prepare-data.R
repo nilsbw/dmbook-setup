@@ -46,6 +46,9 @@ file.copy(file.path("raw", "worlds-of-journalism", "WJS 2012-16 aggregated.sav")
 dir.create(file.path("raw", "barbera-twitter"), showWarnings = FALSE)
 download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/26589/LLYTFB", file.path("raw", "barbera-twitter", "elites-data.RData"))
 file.copy(file.path("raw", "barbera-twitter", "elites-data.RData"), file.path("ch04", "leaders-twitter.RData"))
+load(file.path("raw", "barbera-twitter", "elites-data.RData"))
+elites_italy <- elites.data$italy
+saveRDS(elites_italy, file.path("ch04", "elites-italy.rds"))
 
 
 ### Chapter 05
@@ -72,7 +75,6 @@ for (file in list.files(tmp, "^WID_data")) {
 }
 inequality <- read_delim(file.path("raw", "wid", "WID_data_US.csv"), delim=";") %>% filter(variable == "sptincj992" & percentile == "p90p100")
 write_delim(inequality, file.path("ch06", "us-inequality.csv"), delim = "," )
-unlink(tmp, recursive = TRUE)
 
 
 # US GDP estimates from the Federal Reserve Bank of St. Louis (https://fred.stlouisfed.org/series/A939RX0Q048SBEA)
@@ -151,8 +153,6 @@ read_delim(file.path("raw", "ged", "ged191.csv"), delim = ",") %>%
   filter(where_prec==1) %>%
   select(id, date_start, latitude, longitude, best) %>%
   write_csv(file.path("ch11", "ged.csv"))
-unlink(tmp, recursive = TRUE)
-
 
 ### Chapter 12
 
@@ -182,18 +182,17 @@ read_delim(file.path("raw", "cow-trade", "Dyadic_COW_4.0.csv"), delim = ",") %>%
   filter(year >= 1946 & year <= 2014) %>%
   select(ccode1, ccode2, year, smoothflow1, smoothflow2, smoothtotrade) %>%
   write_csv(gzfile(file.path("ch13", "trade.csv.gz")), na="NA")
-unlink(tmp, recursive = TRUE)
 
 # V-Dem data
 dir.create(file.path("raw", "v-dem"), showWarnings = FALSE)
 tmp <- tempdir()
-download.file("http://v-dem.pol.gu.se/v9/Country_Year_V-Dem_Full+others_R_v9.zip", file.path(tmp, "vdem-complete.zip"))
+download.file("https://v-dem.pol.gu.se/v9/Country_Year_V-Dem_Full+others_R_v9.zip", file.path(tmp, "vdem-complete.zip"))
 unzip(file.path(tmp, "vdem-complete.zip"), exdir=tmp)
 file.copy(file.path(tmp, "Country_Year_V-Dem_Full+others_R_v9", "V-Dem-CY-Full+Others-v9.rds"), file.path("raw", "v-dem", "V-Dem-CY-Full+Others-v9.rds"))
 vdem <- readRDS(file.path("raw", "v-dem", "V-Dem-CY-Full+Others-v9.rds"))
 vdem %>%
   filter(year >= 1946 & year <= 2014) %>%
   select(country_name, year, COWcode, v2x_polyarchy, e_regiongeo, e_migdppc) %>%
+  rename_with(tolower) %>%
   write_csv(file.path("ch13", "vdem.csv"), na="NA")
-unlink(tmp, recursive = TRUE)
 
