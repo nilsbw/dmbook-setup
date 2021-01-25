@@ -15,3 +15,13 @@ The data preparation is documented in `prepare-data.R`. The script downloads eac
 See the code in the data preparation script for the locations of the original files online, and the subfolders where they are stored locally.
 
 Many datasets are modified to facilitate presentation in the book. Modifications include the dropping of variables or cases, the renaming of files, or changes in the file format. See the code in the data preparation script for the modifications applied to the data.
+
+## Installation Instructions
+
+The book relies on several software tools: The R statistical toolkit, the RStudio development environment for R, as well as the PostgreSQL relational database system. Please refer to the following documents for detailed instructions on how to install these tools on your system. 
+
+* [Instructions for Windows users](installation-windows.md)
+
+* [Instructions for MacOS users](installation-mac.md)
+
+* [Instructions for Linux users](installation-linux.md)
