@@ -1,12 +1,10 @@
 # "Data Management for Social Scientists" | Installation Instructions for Windows
 
-## Installing R
+## Installing R and RStudio
 
 For Windows, the R project provides specific installers that are available at [https://cloud.r-project.org/](https://cloud.r-project.org/). Download the latest installer for your system, execute it by double-clicking on the file, and follow the installation instructions. 
 
-## Installing RStudio
-
-To install RStudio, go to the RStudio website at \url{https://www.rstudio.com/products/rstudio/download/}. There are different version, the "free" version is sufficient for our purpose. Download the installer, run this file and follow the installation instructions. You should now have R and RStudio installed on your computer and ready to go. 
+To install RStudio, go to the RStudio website at \url{https://www.rstudio.com/products/rstudio/download/}. There are different versions, the "free" version is sufficient for our purpose. Download the installer, run this file and follow the installation instructions. You should now have R and RStudio installed on your computer. 
 
 ## Installing PostgreSQL and the PostGIS extension
 
@@ -31,6 +29,9 @@ You now have running PostgreSQL server on your system. For the exercises in the 
 * Username: `postgres`
 * Password: `<your_postgres_password>`
 
-Whenever we connect to the database server in the chapters of the book, username and password must be set correctly, otherwise the connection will fail. In our examples, we assume that you left the default port (`5432`) unchanged, and that you installed PostgreSQL on your local machine (which is referred to as `localhost`). If this is *not* the case and for some reason you deviate from this standard configuration, you will have to adjust these parameters for the DB connection in the examples in the book.
+Whenever we connect to the database server in the chapters of the book, username and password must be set correctly, otherwise the connection will fail. In our examples, we assume that you left the default port (`5432`) unchanged, and that you installed PostgreSQL on your local machine (which is referred to as `localhost`). If this is *not* the case and for some reason you deviate from this standard configuration, you will have to adjust these parameters for the DB connections in the code examples.
 
+## Uninstalling PostgreSQL
+
+You can remove the EnterpriseDB Postgres/PostGIS installation via the Control Panel - Programs - Uninstall a program. Remove both PostgreSQL and the PostGIS Bundle. 
 
