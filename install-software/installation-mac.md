@@ -27,6 +27,8 @@ You now have running PostgreSQL server on your system. For the exercises in the 
 
 Whenever we connect to the database server in the chapters of the book, username and password must be set correctly, otherwise the connection will fail. In our examples, we assume that you left the default port (`5432`) unchanged, and that you installed PostgreSQL on your local machine (which is referred to as `localhost`). If this is *not* the case and for some reason you deviate from this standard configuration, you will have to adjust these parameters for the DB connections in the code examples.
 
+Please note: We are installing the PostgreSQL server here with a minimal configuration and solely for the purpose of running the exercises in the book. If you plan to use the server together with other users, such that it can be reached also from other machines, some more configuration is required to enable this and to properly secure the server. The configuration presented here is *not* intended for this purpose. 
+
 ## Uninstalling PostgreSQL
 
 Instructions for removing Postgres.app from your system are provided [here](https://postgresapp.com/documentation/install.html). 

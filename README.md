@@ -20,8 +20,8 @@ Many datasets are modified to facilitate presentation in the book. Modifications
 
 The book relies on several software tools: The R statistical toolkit, the RStudio development environment for R, as well as the PostgreSQL relational database system. Please refer to the following documents for detailed instructions on how to install these tools on your system. 
 
-* [Instructions for Windows users](install/installation-windows.md)
+* [Instructions for Windows users](install-software/installation-windows.md)
 
-* [Instructions for MacOS users](install/installation-mac.md)
+* [Instructions for MacOS users](install-software/installation-mac.md)
 
-* [Instructions for Linux users](install/installation-linux.md)
+* [Instructions for Linux users](install-software/installation-linux.md)
