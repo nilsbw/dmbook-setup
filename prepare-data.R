@@ -5,6 +5,8 @@ library(countrycode)
 
 # This file documents the generation of the data files for the exercises in 
 # Weidmann, Nils B. "Data Management for Social Scientists"
+# It is provided for replication purposes. You do NOT need to run this code
+# for the examples and exercises in the book. 
 
 # create directory for raw files
 dir.create(file.path("raw"), showWarnings = FALSE)
