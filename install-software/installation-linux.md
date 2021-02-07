@@ -2,7 +2,7 @@
 
 ## Installing R and RStudio
 
-R is available for almost all Linux distributions, and the installation depends on which package manager the distribution is using. For example, Ubuntu Linux uses the APT package manager. The R package is called `r-base`, so you can install it with `sudo apt install r-base`.
+R is available for almost all Linux distributions, and the installation depends on which package manager the distribution is using. For example, Ubuntu Linux uses the APT package manager. The R package is called `r-base`, so you can install it with `sudo apt install r-base`. You need at least R version 4.0.
 
 To install RStudio, go to the RStudio website at [https://www.rstudio.com/products/rstudio/download/](https://www.rstudio.com/products/rstudio/download/). In the "Installers" section, click on the link for your particular operating system. This will download an installation package, which you can then install with your package manager. For Ubuntu Linux, for example, you download a `.deb` package, which you install with `dpkg -i <filename>.deb`. You should now have R and RStudio installed on your computer. 
 
