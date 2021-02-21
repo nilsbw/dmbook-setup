@@ -150,9 +150,10 @@ tmp <- tempdir()
 download.file("https://ucdp.uu.se/downloads/ged/ged191-csv.zip", file.path(tmp, "ged191-csv.zip"))
 unzip(file.path(tmp, "ged191-csv.zip"), exdir=tmp)
 file.copy(file.path(tmp, "ged191.csv"), file.path("raw", "ged", "ged191.csv"))
-read_delim(file.path("raw", "ged", "ged191.csv"), delim = ",") %>%
+ged <- read_delim(file.path("raw", "ged", "ged191.csv"), delim = ",") %>%
   filter(conflict_new_id %in% c(389, 397, 451, 528, 4523, 4871)) %>%
-  filter(where_prec==1) %>%
+  filter(country_id == 346) %>%     # only events on the territory of B&H
+  filter(where_prec==1) %>%    # only events that are geo-located with high precision
   select(id, date_start, latitude, longitude, best) %>%
   write_csv(file.path("ch11", "ged.csv"))
 
