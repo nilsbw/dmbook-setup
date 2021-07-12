@@ -2,7 +2,7 @@
 
 ## Project file
 
-The `dmbook-exercises.Rproj` file can be used as a project file for RStudio.
+The `dmbook.Rproj` file can be used as a project file for RStudio.
 
 ## Data 
 
