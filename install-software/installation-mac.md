@@ -2,21 +2,21 @@
 
 ## Installing R and RStudio
 
-For Mac, the R project provides specific installers that are available at [https://cloud.r-project.org/](https://cloud.r-project.org/). Download the latest installer for your system (you need at least version 4.0), execute it by double-clicking on the file, and follow the installation instructions. 
+For Mac, the R project provides specific installers that are available at [https://cloud.r-project.org/](https://cloud.r-project.org/). Download the latest installer for your system (you need at least version 4.1), execute it by double-clicking on the file, and follow the installation instructions. 
 
 To install RStudio, go to the RStudio website at \url{https://www.rstudio.com/products/rstudio/download/}. There are different versions, the "free" version is sufficient for our purpose. Download the installer, run this file and follow the installation instructions. You should now have R and RStudio installed on your computer. 
 
 ## Installing PostgreSQL and the PostGIS extension
 
-To run the PostgreSQL database server on a Mac, we rely on the excellent *Postgres.app* installer. This is a pre-packaged version the (open-source) PostgreSQL database system and extremely convenient for Mac users to install. 
+To run the PostgreSQL database server on a Mac, we rely on the excellent *Postgres.app* installer. This is a pre-packaged version the (open-source) PostgreSQL database system and makes the installation extremely convenient for Mac users. 
 
-Download the installer from the [Postgres.app website](https://postgresapp.com/downloads.html). We recommend that you choose version 2.4.1 of Postgres.app, which includes version 13 of the PostgreSQL database server. Conveniently for our purpose, Postgres.app contains also the PostGIS spatial extension for PostgreSQL, which we need in the chapter on spatial data. Run the installer by double-clicking the file you downloaded and simply drag-and-drop Postgres.app into your "Applications" folder.
+Download the installer from the [Postgres.app website](https://postgresapp.com/downloads.html). We recommend that you choose version 2.4.3 of Postgres.app, which includes version 13 of the PostgreSQL database server. Conveniently for our purpose, Postgres.app contains also the PostGIS spatial extension for PostgreSQL, which we need in the chapter on spatial data. Run the installer by double-clicking the file you downloaded and simply drag-and-drop Postgres.app into your "Applications" folder.
 
 Once this is done, you can run Postgres.app just like any other Mac application, simply by double-clicking on it in the "Applications" folder. The first time you do this you need to initialize a new server, as this is not done automatically. When you start Postgres.app, the following window comes up:
 
 ![](mac-postgres1.png)
 
-At the bottom left, click the little `+` icon to add a server. Enter a name for the new server, for example "Postgres 13". Select version 13, and leave the default values for the data directory and the port (5432) unchanged. Click "Create Server", and you're done. The new server is not running yet, so you need to start it with the corresponding button in Postgres.app. You can now close the Postgres.app main window. The elephant icon in the main menu bar allows you to quickly start/stop your server.
+At the bottom right, click "Initialize" to configure a new server. You can simply leave the default values for the server name etc (unless you already have PostgreSQL or another server running on port 5432, which is unlikely). The new server is started automatically, and you can now close the Postgres.app main window. If you later want to start/stop the new server, you can do this through Postgress.app or the elephant icon in the main menu bar.
 
 When we later connect to our new server from R, we need to provide a user name and a password. Postgres.app automatically configures the server such that is uses your (short) Mac username for this purpose. If you're unsure what this username is, see [Apple's instructions](https://support.apple.com/en-ae/guide/mac-help/mh35548/11.0/mac/11.0) to find out. By default, there is no password for this user. 
 
