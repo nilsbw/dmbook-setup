@@ -2,3 +2,5 @@
 .Rhistory
 .Ruserdata
 raw
+settings.dcf
+renv/library
