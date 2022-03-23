@@ -1,5 +1,9 @@
 # Project Configuration and Data for "Data Management for Social Scientists" by Nils B. Weidmann
 
+## Installation Instructions
+
+Please refer to the main website for the book at [https://dmbook.org](https://dmbook.org).
+
 ## Project Configuration
 
 The `dmbook.Rproj` file should be used as a project file for RStudio. The `renv` lock file specifies the used packages for the book, it is applied automatically when the project is first opened. 
