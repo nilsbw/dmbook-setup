@@ -1,8 +1,8 @@
-# Supplementary Material for "Data Management for Social Scientists" by Nils B. Weidmann
+# Project Configuration and Data for "Data Management for Social Scientists" by Nils B. Weidmann
 
-## Project file
+## Project Configuration
 
-The `dmbook.Rproj` file can be used as a project file for RStudio.
+The `dmbook.Rproj` file should be used as a project file for RStudio. The `renv` lock file specifies the used packages for the book, it is applied automatically when the project is first opened. 
 
 ## Data 
 
@@ -12,16 +12,4 @@ The data preparation is documented in `prepare-data.R`. The script downloads eac
 
 *For readers of this book, there is no need to run this file, since the required data files can be obtained directly from this repository.*
 
-See the code in the data preparation script for the locations of the original files online, and the subfolders where they are stored locally.
-
 Many datasets are modified to facilitate presentation in the book. Modifications include the dropping of variables or cases, the renaming of files, or changes in the file format. See the code in the data preparation script for the modifications applied to the data.
-
-## Installation Instructions
-
-The book relies on several software tools: The R statistical toolkit, the RStudio development environment for R, as well as the PostgreSQL relational database system. Please refer to the following documents for detailed instructions on how to install these tools on your system. 
-
-* [Instructions for Windows users](install-software/installation-windows.md)
-
-* [Instructions for MacOS users](install-software/installation-mac.md)
-
-* [Instructions for Linux users](install-software/installation-linux.md)
