@@ -110,6 +110,7 @@ download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?p
 read_delim(file.path("raw", "parlgov", "election.tab"), delim = "\t", escape_backslash = T, escape_double = F) %>% 
   filter(election_type == "parliament") %>% 
   filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region")) | country_name_short == "CYP") %>%
+  filter(!is.na(vote_share) & !is.na(seats)) %>%
   select(election_id, country_name, election_date, party_id, vote_share, seats, seats_total) %>% 
   write_csv(file.path("ch08", "elections.csv"))
 
@@ -122,6 +123,7 @@ download.file("https://dataverse.harvard.edu/api/access/datafile/:persistentId?p
 read_delim(file.path("raw", "parlgov", "election.tab"), delim = "\t", escape_backslash = T, escape_double = F) %>% 
   filter(election_type == "parliament") %>% 
   filter(grepl("Europe", countrycode(country_name_short, "iso3c", "region")) | country_name_short == "CYP") %>%
+  filter(!is.na(vote_share) & !is.na(seats)) %>%
   select(election_id, country_name, election_date, party_id, vote_share, seats, seats_total) %>% 
   write_csv(file.path("ch09", "elections.csv"))
 read_delim(file.path("raw", "parlgov", "party.tab"), delim = "\t", escape_backslash = T, escape_double = F) %>% 
