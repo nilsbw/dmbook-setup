@@ -17,7 +17,7 @@ install.packages("sf", type="binary", dependencies = T)
 install.packages("readtext", type="binary", dependencies = T)
 install.packages("quanteda", type="binary", dependencies = T)
 install.packages("igraph", type="binary", dependencies = T)
-
+install.packages("stringdist", type="binary", dependencies = T) # Required for exercises Chapter 12
 
 library("DBI")
 library("RPostgres")
@@ -32,6 +32,7 @@ library("sf")
 library("readtext")
 library("quanteda")
 library("igraph")
+library("stringdist")
 
 
 
