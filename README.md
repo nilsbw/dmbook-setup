@@ -17,3 +17,7 @@ The data preparation is documented in `prepare-data.R`. The script downloads eac
 *For readers of this book, there is no need to run this file, since the required data files can be obtained directly from this repository.*
 
 Many datasets are modified to facilitate presentation in the book. Modifications include the dropping of variables or cases, the renaming of files, or changes in the file format. See the code in the data preparation script for the modifications applied to the data.
+
+## Issues
+
+If you encounter an error in the data and configuration provided here, please file an issue at [https://github.com/nilsbw/dmbook-setup/issues](https://github.com/nilsbw/dmbook-setup/issues). 
