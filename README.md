@@ -21,3 +21,7 @@ Many datasets are modified to facilitate presentation in the book. Modifications
 ## Issues
 
 If you encounter an error in the data and configuration provided here, please file an issue at [https://github.com/nilsbw/dmbook-setup/issues](https://github.com/nilsbw/dmbook-setup/issues). 
+
+## Errata
+
+A list of errors identified after publication can be found [here](https://github.com/nilsbw/dmbook-setup/blob/main/ERRORS.md). 
