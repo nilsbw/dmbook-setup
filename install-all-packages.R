@@ -4,20 +4,20 @@
 # project environment as described in the instructions, you 
 # do NOT need to run this code.
 
-install.packages("DBI", type="binary", dependencies = T)
-install.packages("RPostgres", type="binary", dependencies = T)
-install.packages("doBy", type="binary", dependencies = T)
-install.packages("readr", type="binary", dependencies = T)
-install.packages("readxl", type="binary", dependencies = T)
-install.packages("haven", type="binary", dependencies = T)
-install.packages("labelled", type="binary", dependencies = T)
-install.packages("tidyverse", type="binary", dependencies = T)
-install.packages("countrycode", type="binary", dependencies = T)
-install.packages("sf", type="binary", dependencies = T)
-install.packages("readtext", type="binary", dependencies = T)
-install.packages("quanteda", type="binary", dependencies = T)
-install.packages("igraph", type="binary", dependencies = T)
-install.packages("stringdist", type="binary", dependencies = T) # Required for exercises Chapter 12
+install.packages("DBI", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("RPostgres", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("doBy", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("readr", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("readxl", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("haven", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("labelled", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("tidyverse", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("countrycode", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("sf", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("readtext", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("quanteda", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("igraph", type="binary", dependencies = c("Depends", "Imports", "LinkingTo"))
+install.packages("stringdist", type="binary", dependencies = c("Depends", "Imports", "LinkingTo")) # Required for exercises Chapter 12
 
 library("DBI")
 library("RPostgres")
